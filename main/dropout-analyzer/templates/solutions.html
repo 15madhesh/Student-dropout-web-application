@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Student Solutions</h2>
+    <div style="display: flex; gap: 20px;">
+        <div style="flex: 1;">
+            <form method="POST" id="solutionForm">
+                <label for="studentSelect">Select Student:</label>
+                <select id="studentSelect" name="student_id">
+                    <option value="">-- Select a student --</option>
+                    {% for student in students %}
+                        <option value="{{ student.id }}" {% if selected_student and student.id == selected_student.id %}selected{% endif %}>{{ student.stud_name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" name="action" value="load" style="margin-left: 10px;">Load</button>
+            </form>
+        </div>
+        <div style="flex: 2;">
+            {% if selected_student %}
+                <h3>Support Solutions for {{ selected_student.stud_name }}</h3>
+                <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px;">
+                    <h4>Dropout Reasons:</h4>
+                    <ul>
+                        {% if dropout_details.disciplinary_action %}
+                        <li>Disciplinary Action</li>
+                        {% endif %}
+                        {% if dropout_details.fees_payment_status == 'pending' %}
+                        <li>Financial Issues (Fees Pending)</li>
+                        {% endif %}
+                        {% if dropout_details.health_issue %}
+                        <li>Health Issues: {{ dropout_details.health_issue_description }}</li>
+                        {% endif %}
+                    </ul>
+                    
+                    {% if dropout_details.fees_payment_status == 'pending' or (dropout_details.family_income and dropout_details.family_income|int < 200000) %}
+                        <h5>Financial Support Solutions:</h5>
+                        <ul>
+                            <li><strong>For Low Income Families (<₹200,000):</strong>
+                                <ul>
+                                    <li><a href="https://www.vidyalakshmi.co.in/" target="_blank">Vidya Lakshmi Education Loan</a></li>
+                                    <li><a href="https://www.youtube.com/watch?v=XYZ789" target="_blank">Financial Planning Guide</a></li>
+                                    <li>College Financial Aid Office - Request fee reduction</li>
+                                </ul>
+                            </li>
+                            <li><strong>For Pending Fees:</strong>
+                                <ul>
+                                    <li><a href="https://www.youtube.com/watch?v=ABC123" target="_blank">Emergency Funding Options Video</a></li>
+                                    <li>Installment Payment Plans - Contact college administration</li>
+                                    <li>Part-time Work Opportunities on Campus</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    {% elif 'academic' in selected_student.status.lower() %}
+                        <h5>Academic Support Solutions:</h5>
+                        <ul>
+                            <li>Study Skills Videos: <a href="https://www.youtube.com/watch?v=5ad6grll-ak" target="_blank">Effective Study Techniques</a></li>
+                            <li>Tutoring Services: Contact college academic support center</li>
+                            <li>Time Management Resources</li>
+                        </ul>
+                    {% elif 'disciplinary' in selected_student.status.lower() %}
+                        <h5>Behavioral Support Solutions:</h5>
+                        <ul>
+                            <li><a href="https://youtu.be/Jz55Uk9EH6U?si=OmXGRhVbREUACnxj" target="_blank">Disciplinary Counseling Session</a> (50 min)</li>
+                            <li><a href="https://youtu.be/AqKHVOJ0mAo?si=RPyWO7z9970v3tcG" target="_blank">Behavior Change Strategies</a> (35 min)</li>
+                            <li><a href="https://www.youtube.com/watch?v=Zk3bAUq7cx8" target="_blank">Behavior Improvement</a> (45 min)</li>
+                            <li>Mandatory Mentorship Program enrollment</li>
+                            <li>Probation with behavior contract</li>
+                        </ul>
+                    {% elif 'health' in selected_student.status.lower() %}
+                        <h5>Health Support Solutions:</h5>
+                        <ul>
+                            <li>Online Tutoring Resources</li>
+                            <li>Medical Leave Policy Information</li>
+                            <li>Flexible Attendance Options</li>
+                        </ul>
+                    {% else %}
+                        <p>General support solutions will be provided based on further assessment.</p>
+                    {% endif %}
+                    
+                    <div style="margin-top: 20px;">
+                        <h5>Contact College Support:</h5>
+                        <p>Email: support@college.edu | Phone: 1800-123-4567</p>
+                    </div>
+                </div>
+            {% else %}
+                <p>Please select a student to view recommended solutions.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('studentSelect').addEventListener('change', function() {
+    document.getElementById('solutionForm').submit();
+});
+</script>
+{% endblock %}

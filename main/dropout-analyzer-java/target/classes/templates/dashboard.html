@@ -1,0 +1,22 @@
+<div th:replace="~{base :: content}">
+    <div class="container">
+        <h2>Welcome, <span th:text="${user}">User</span>!</h2>
+        <div class="panel">
+            <div class="action-buttons">
+                <a th:href="@{/update-marks}" class="btn">Update Marks</a>
+                <a th:href="@{/manual-entry}" class="btn">Add Student</a>
+                <a th:href="@{/signout}" class="btn">Sign Out</a>
+            </div>
+        </div>
+        <div class="news-panel">
+            <h3>Latest News on Student Dropouts</h3>
+            <div class="news-carousel-container">
+                <ul class="news-carousel-list">
+                    <!-- News items will be populated here by JS -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/news-carousel.js}"></script>
+</div>

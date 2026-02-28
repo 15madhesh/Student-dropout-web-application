@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dropout Analysis Result</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+    <div class="container">
+        <h1>Dropout Analysis Result</h1>
+        <div class="result">
+            <p th:text="${result}"></p>
+        </div>
+        <a th:href="@{/upload}" class="btn">Upload Another File</a>
+        <a th:href="@{/manual-entry}" class="btn">Manual Entry</a>
+        <a th:href="@{/dashboard}" class="btn">Dashboard</a>
+        <a th:href="@{/logout}" class="btn">Logout</a>
+    </div>
+</body>
+</html>

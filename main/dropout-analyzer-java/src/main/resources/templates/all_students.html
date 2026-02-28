@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>All Students</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e9f5ff;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Students Details</h1>
+    <input type="text" id="searchInput" placeholder="Search students..." style="width: 100%; padding: 10px; margin-bottom: 20px; font-size: 16px;" />
+    <table id="studentsTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>Status</th>
+                <th>SSLC Marks</th>
+                <th>HSC Marks</th>
+                <th>College Name</th>
+                <th>Mother's Name</th>
+                <th>Father's Name</th>
+                <th>Address</th>
+                <th>Dropout %</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="student : ${students}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.username}"></td>
+                <td class="student-name" th:attr="data-student-id=${student.id}" style="color: blue; cursor: pointer;" th:text="${student.stud_name}"></td>
+                <td th:text="${student.dob}"></td>
+                <td th:text="${student.status}"></td>
+                <td th:text="${student.sslc_marks}"></td>
+                <td th:text="${student.hsc_marks}"></td>
+                <td th:text="${student.clg_name}"></td>
+                <td th:text="${student.mother_name}"></td>
+                <td th:text="${student.father_name}"></td>
+                <td th:text="${student.address}"></td>
+                <td class="dropout-percentage" th:id="'dropout-' + ${student.id}">Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div id="marksModal" style="display:none; position: fixed; top: 10%; left: 50%; transform: translateX(-50%); background: white; border: 1px solid #ccc; padding: 20px; max-width: 600px; max-height: 70vh; overflow-y: auto; box-shadow: 0 0 10px rgba(0,0,0,0.25); z-index: 1000;">
+        <h2>University Marks</h2>
+        <button id="closeModal" style="float: right; cursor: pointer;">Close</button>
+        <div id="marksContent"></div>
+    </div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const searchInput = document.getElementById('searchInput');
+        const table = document.getElementById('studentsTable');
+        searchInput.addEventListener('keyup', function() {
+            const filter = searchInput.value.toLowerCase();
+            const rows = table.getElementsByTagName('tr');
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                let match = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+                        match = true;
+                        break;
+                    }
+                }
+                rows[i].style.display = match ? '' : 'none';
+            }
+        });
+
+        const marksModal = document.getElementById('marksModal');
+        const marksContent = document.getElementById('marksContent');
+        const closeModal = document.getElementById('closeModal');
+
+        closeModal.addEventListener('click', () => {
+            marksModal.style.display = 'none';
+            marksContent.innerHTML = '';
+        });
+
+        document.querySelectorAll('.student-name').forEach(item => {
+            item.addEventListener('click', event => {
+                const studentId = event.target.getAttribute('data-student-id');
+                fetch(/*[[${'/student-marks/' + studentId}]]*/)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            marksContent.innerHTML = `<p style="color:red;">${data.error}</p>`;
+                        } else {
+                            let html = '';
+                            if (data.marks.length === 0) {
+                                html = '<p>No marks available for this student.</p>';
+                            } else {
+                                data.marks.forEach(mark => {
+                                    html += `<h3>Semester ${mark.semester}</h3>`;
+                                    html += '<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; margin-bottom: 20px;">';
+                                    html += '<tr><th>Subject</th><th>Internal 1</th><th>Internal 2</th><th>Internal 3</th></tr>';
+                                    for (let i = 1; i <= 6; i++) {
+                                        html += `<tr>
+                                            <td>Subject ${i}</td>
+                                            <td>${mark['internal1_sub' + i] !== null ? mark['internal1_sub' + i] : '-'}</td>
+                                            <td>${mark['internal2_sub' + i] !== null ? mark['internal2_sub' + i] : '-'}</td>
+                                            <td>${mark['internal3_sub' + i] !== null ? mark['internal3_sub' + i] : '-'}</td>
+                                        </tr>`;
+                                    }
+                                    html += `<tr><td><strong>CGPA</strong></td><td colspan="3">${mark.cgpa !== null ? mark.cgpa : '-'}</td></tr>`;
+                                    html += '</table>';
+                                });
+                            }
+                            marksContent.innerHTML = html;
+                        }
+                        marksModal.style.display = 'block';
+                        if (data.dropout_percentage !== undefined) {
+                            const dropoutCell = document.getElementById('dropout-' + studentId);
+                            if (dropoutCell) {
+                                dropoutCell.textContent = data.dropout_percentage + '%';
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        marksContent.innerHTML = `<p style="color:red;">Error fetching marks.</p>`;
+                        marksModal.style.display = 'block';
+                    });
+            });
+        });
+        /*]]>*/
+    </script>
+</body>
+</html>

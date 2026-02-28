@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropout Analyzer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Dropout Analyzer</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                <li><a href="{{ url_for('about') }}">About</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Analyze Student Dropout Rates</h2>
+        <p>Use our application to analyze dropout rates based on uploaded data or manual entries.</p>
+        <a href="{{ url_for('upload') }}" class="button">Upload Data</a>
+        <a href="{{ url_for('manual_entry') }}" class="button">Manual Entry</a>
+    </main>
+    
+    <!-- Chatbase widget removed -->
+
+    <footer>
+        <p>&copy; 2023 Dropout Analyzer. All rights reserved.</p>
+    </footer>
+</body>
+</html>

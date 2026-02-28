@@ -1,0 +1,11 @@
+com\example\dropoutanalyzer\controller\ApiController.class
+com\example\dropoutanalyzer\model\DropoutStudentDetails.class
+com\example\dropoutanalyzer\controller\MainController.class
+com\example\dropoutanalyzer\DropoutAnalyzerApplication.class
+com\example\dropoutanalyzer\config\WebSecurityConfig.class
+com\example\dropoutanalyzer\service\DropoutAnalysisService.class
+com\example\dropoutanalyzer\repository\DropoutStudentDetailsRepository.class
+com\example\dropoutanalyzer\repository\UniversityMarksRepository.class
+com\example\dropoutanalyzer\repository\StudentRepository.class
+com\example\dropoutanalyzer\model\Student.class
+com\example\dropoutanalyzer\model\UniversityMarks.class

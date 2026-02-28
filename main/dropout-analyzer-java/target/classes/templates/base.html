@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dropout Analyzer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <div th:if="${session.user != null}">
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/stats}">Statistics</a>
+            <a th:href="@{/upload}">Upload</a>
+            <a th:href="@{/manual-entry}">Manual Entry</a>
+            <a th:href="@{/update-marks}">Update University Marks</a>
+            <a th:href="@{/all-students}">Student Details</a>
+            <a th:href="@{/about}">About</a>
+            <a th:href="@{/contact}">Contact</a>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+        <div th:if="${session.user == null}">
+            <a th:href="@{/login}">Login</a>
+            <a th:href="@{/signup}">Signup</a>
+        </div>
+    </nav>
+    <th:block th:replace="~{this :: content}"></th:block>
+
+    <div th:if="${session.user != null}">
+    <!-- Global Chatbase AI Chatbot Widget -->
+    <script>
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop=="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="GPxk8n5Uv-kiINDcIjU0w";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+    </script>
+    </div>
+</body>
+</html>

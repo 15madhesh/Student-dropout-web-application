@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="stats-container">
+    <h1>Dropout Statistics</h1>
+    
+    <div class="chart-row">
+        <div class="chart-container">
+            <h2>Gender-wise Dropout Distribution</h2>
+            <canvas id="genderChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>State-wise Dropout Distribution</h2>
+            <canvas id="stateChart"></canvas>
+        </div>
+    </div>
+
+    <div class="chart-row">
+        <div class="chart-container">
+            <h2>College-wise Dropout Distribution</h2>
+            <canvas id="collegeChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>Age Distribution</h2>
+            <canvas id="ageChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/stats.js') }}"></script>
+{% endblock %}

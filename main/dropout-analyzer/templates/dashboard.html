@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Welcome, {{ session['user'] }}!</h2>
+    <div class="panel">
+        <div class="action-buttons">
+            <a href="{{ url_for('update_marks') }}" class="btn">Update Marks</a>
+            <a href="{{ url_for('manual_entry') }}" class="btn">Add Student</a>
+            <a href="{{ url_for('signout') }}" class="btn">Sign Out</a>
+        </div>
+    </div>
+    <div class="news-panel">
+        <h3>Latest News on Student Dropouts</h3>
+        <div class="news-carousel-container">
+            <ul class="news-carousel-list">
+                <!-- News items will be populated here by JS -->
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/news-carousel.js') }}"></script>
+{% endblock %}

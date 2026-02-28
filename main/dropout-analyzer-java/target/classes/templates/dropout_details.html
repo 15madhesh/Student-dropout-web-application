@@ -1,0 +1,41 @@
+<div th:replace="~{base :: content}">
+    <div class="container" style="max-width: 900px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h2>Dropout Student Details</h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr style="background-color: #007BFF; color: white;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Name</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Date of Birth</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Family Income</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Fees Payment Status</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Disciplinary Action</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Educational Load</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Part Time Work</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Health Issue</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Health Issue Description</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Day Scholar / Hosteller</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${dropout_students}">
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.student.stud_name}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.student.dob}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.family_income}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.fees_payment_status}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.disciplinary_action ? 'Yes' : 'No'}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.educational_load ? 'Yes' : 'No'}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.part_time_work ? 'Yes' : 'No'}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.health_issue ? 'Yes' : 'No'}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.health_issue_description}"></td>
+                    <td style="padding: 8px; border: 1px solid #ddd;" th:text="${item.details.day_scholar_or_hosteller}"></td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(dropout_students)}">
+                    <td colspan="10" style="text-align: center; padding: 10px;">No dropout student details found.</td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="margin-top: 20px;">
+            <a th:href="@{/dropout-students}" style="text-decoration: none; color: #007BFF;">&larr; Back to Dropout Students</a>
+        </div>
+    </div>
+</div>

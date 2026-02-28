@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Manual Entry for Dropout Analysis</h1>
+    <div class="panel">
+        <form method="POST">
+            <label>Student Name:</label>
+            <input type="text" name="stud_name" required>
+            <label>Gender:</label>
+            <select name="gender" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            <label>Date of Birth:</label>
+            <input type="date" name="dob" required>
+            <label>Current Studying Status:</label>
+            <input type="text" name="status" required>
+            <label>SSLC Marks:</label>
+            <input type="text" name="sslc_marks" required>
+            <label>HSC Marks:</label>
+            <input type="text" name="hsc_marks" required>
+            <label>College Name:</label>
+            <select name="clg_name" required>
+                <option value="">Select a college</option>
+                <option value="Indian Institute of Technology Madras">Indian Institute of Technology Madras</option>
+                <option value="National Institute of Technology, Tiruchirappalli">National Institute of Technology, Tiruchirappalli</option>
+                <option value="Vellore Institute of Technology">Vellore Institute of Technology</option>
+                <option value="National Institute of Technology, Tiruchirappalli">National Institute of Technology, Tiruchirappalli</option>
+                <option value="Vellore Institute of Technology">Vellore Institute of Technology</option>
+                <option value="SRM Institute of Science and Technology">SRM Institute of Science and Technology</option>
+                <option value="PSG College of Technology">PSG College of Technology</option>
+                <option value="College of Engineering, Guindy">College of Engineering, Guindy</option>
+                <option value="Thapar Institute of Engineering and Technology">Thapar Institute of Engineering and Technology</option>
+                <option value="Birla Institute of Technology and Science">Birla Institute of Technology and Science</option>
+                <option value="Delhi Technological University">Delhi Technological University</option>
+                <option value="Indian Institute of Technology Bombay">Indian Institute of Technology Bombay</option>
+                <option value="Indian Institute of Technology Delhi">Indian Institute of Technology Delhi</option>
+                <option value="Indian Institute of Technology Kanpur">Indian Institute of Technology Kanpur</option>
+                <option value="Indian Institute of Technology Kharagpur">Indian Institute of Technology Kharagpur</option>
+                <option value="Indian Institute of Technology Roorkee">Indian Institute of Technology Roorkee</option>
+                <option value="Jadavpur University">Jadavpur University</option>
+                <option value="Anna University">Anna University</option>
+                <option value="Manipal Institute of Technology">Manipal Institute of Technology</option>
+                <option value="Amity University">Amity University</option>
+                <option value="Lovely Professional University">Lovely Professional University</option>
+                <option value="UPES">UPES</option>
+                <option value="Symbiosis International University">Symbiosis International University</option>
+                <option value="Chandigarh University">Chandigarh University</option>
+                <option value="KIIT University">KIIT University</option>
+                <option value="Savitribai Phule Pune University">Savitribai Phule Pune University</option>
+                <option value="University of Mumbai">University of Mumbai</option>
+                <option value="University of Delhi">University of Delhi</option>
+                <option value="Jawaharlal Nehru University">Jawaharlal Nehru University</option>
+                <option value="Banaras Hindu University">Banaras Hindu University</option>
+                <option value="University of Hyderabad">University of Hyderabad</option>
+                <option value="Indian Statistical Institute">Indian Statistical Institute</option>
+                <option value="Tata Institute of Fundamental Research">Tata Institute of Fundamental Research</option>
+                <option value="Indian Institute of Science">Indian Institute of Science</option>
+                <option value="Indian Institute of Space Science and Technology">Indian Institute of Space Science and Technology</option>
+                <option value="National Institute of Industrial Engineering">National Institute of Industrial Engineering</option>
+                <option value="International Institute of Information Technology, Hyderabad">International Institute of Information Technology, Hyderabad</option>
+                <option value="Indian Institute of Information Technology, Allahabad">Indian Institute of Information Technology, Allahabad</option>
+                <option value="Indian Institute of Information Technology and Management, Gwalior">Indian Institute of Information Technology and Management, Gwalior</option>
+                <option value="Indian Institute of Information Technology, Design and Manufacturing, Kancheepuram">Indian Institute of Information Technology, Design and Manufacturing, Kancheepuram</option>
+                <option value="Indian Institute of Information Technology, Sri City">Indian Institute of Information Technology, Sri City</option>
+                <option value="Indian Institute of Information Technology, Vadodara">Indian Institute of Information Technology, Vadodara</option>
+                <option value="Indian Institute of Information Technology, Kota">Indian Institute of Information Technology, Kota</option>
+                <option value="Indian Institute of Information Technology, Kottayam">Indian Institute of Information Technology, Kottayam</option>
+                <option value="Indian Institute of Information Technology, Manipur">Indian Institute of Information Technology, Manipur</option>
+                <option value="Indian Institute of Information Technology, Nagpur">Indian Institute of Information Technology, Nagpur</option>
+                <option value="Indian Institute of Information Technology, Pune">Indian Institute of Information Technology, Pune</option>
+                <option value="Indian Institute of Information Technology, Ranchi">Indian Institute of Information Technology, Ranchi</option>
+                <option value="Indian Institute of Information Technology, Sonepat">Indian Institute of Information Technology, Sonepat</option>
+                <option value="Indian Institute of Information Technology, Surat">Indian Institute of Information Technology, Surat</option>
+                <option value="Indian Institute of Information Technology, Tiruchirappalli">Indian Institute of Information Technology, Tiruchirappalli</option>
+                <option value="Indian Institute of Information Technology, Una">Indian Institute of Information Technology, Una</option>
+                <option value="Indian Institute of Information Technology, Dharwad">Indian Institute of Information Technology, Dharwad</option>
+                <option value="Indian Institute of Information Technology, Lucknow">Indian Institute of Information Technology, Lucknow</option>
+                <option value="Indian Institute of Information Technology, Bhagalpur">Indian Institute of Information Technology, Bhagalpur</option>
+                <option value="Indian Institute of Information Technology, Bhopal">Indian Institute of Information Technology, Bhopal</option>
+                <option value="Indian Institute of Information Technology, Guwahati">Indian Institute of Information Technology, Guwahati</option>
+                <option value="Indian Institute of Information Technology, Jabalpur">Indian Institute of Information Technology, Jabalpur</option>
+                <option value="Indian Institute of Information Technology, Kurnool">Indian Institute of Information Technology, Kurnool</option>
+                <option value="Indian Institute of Information Technology, Raichur">Indian Institute of Information Technology, Raichur</option>
+                <option value="Indian Institute of Information Technology, Agartala">Indian Institute of Information Technology, Agartala</option>
+                <option value="Indian Institute of Information Technology, Amethi">Indian Institute of Information Technology, Amethi</option>
+                <option value="Indian Institute of Information Technology, Berhampur">Indian Institute of Information Technology, Berhampur</option>
+                <option value="Indian Institute of Information Technology, Bhiwani">Indian Institute of Information Technology, Bhiwani</option>
+                <option value="Indian Institute of Information Technology, Chittoor">Indian Institute of Information Technology, Chittoor</option>
+                <option value="Indian Institute of Information Technology, Gorakhpur">Indian Institute of Information Technology, Gorakhpur</option>
+                <option value="Indian Institute of Information Technology, Kalyani">Indian Institute of Information Technology, Kalyani</option>
+            </select>
+            <label>Attendance Percentage:</label>
+            <input type="number" name="attendance_percent" min="0" max="100" step="0.01" required>
+            <label>Mother Name:</label>
+            <input type="text" name="mother_name" required>
+            <label>Father Name:</label>
+            <input type="text" name="father_name" required>
+            <label>Address:</label>
+            <textarea name="address" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

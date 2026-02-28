@@ -1,0 +1,62 @@
+<div th:replace="~{base :: content}">
+    <div class="container">
+        <h2>Update University Marks</h2>
+        <div th:if="${error}" class="panel" style="color: red;" th:text="${error}"></div>
+        <div th:if="${success}" class="panel" th:text="${success}"></div>
+        <form method="post" class="panel">
+            <label>Select Student:</label>
+            <select name="student_id" required="required">
+                <option th:each="s : ${students}" th:value="${s.id}" th:text="${s.stud_name + ' (' + s.dob + ')'}"></option>
+            </select>
+            <label>Semester:</label>
+            <input type="number" name="semester" min="1" max="8" required="required" />
+            <label>Stage:</label>
+            <select name="stage" required="required">
+                <option value="internal1">1st Internal</option>
+                <option value="internal2">2nd Internal</option>
+                <option value="internal3">3rd Internal</option>
+                <option value="cgpa">Final CGPA</option>
+            </select>
+            <div id="marks-fields">
+                <label>Subject 1:</label><input type="number" name="sub1" step="0.01" />
+                <label>Subject 2:</label><input type="number" name="sub2" step="0.01" />
+                <label>Subject 3:</label><input type="number" name="sub3" step="0.01" />
+                <label>Subject 4:</label><input type="number" name="sub4" step="0.01" />
+                <label>Subject 5:</label><input type="number" name="sub5" step="0.01" />
+                <label>Subject 6:</label><input type="number" name="sub6" step="0.01" />
+                <label>CGPA (only for Final CGPA):</label><input type="number" name="cgpa" step="0.01" />
+            </div>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+    <script>
+        const stageSelect = document.querySelector('select[name="stage"]');
+        const cgpaField = document.querySelector('input[name="cgpa"]').parentElement;
+        const subjectFields = [
+            document.querySelector('input[name="sub1"]').parentElement,
+            document.querySelector('input[name="sub2"]').parentElement,
+            document.querySelector('input[name="sub3"]').parentElement,
+            document.querySelector('input[name="sub4"]').parentElement,
+            document.querySelector('input[name="sub5"]').parentElement,
+            document.querySelector('input[name="sub6"]').parentElement
+        ];
+
+        function toggleFields(stage) {
+            if (stage === 'cgpa') {
+                cgpaField.style.display = 'block';
+                subjectFields.forEach(f => f.style.display = 'none');
+            } else {
+                cgpaField.style.display = 'none';
+                subjectFields.forEach(f => f.style.display = 'block');
+            }
+        }
+
+        stageSelect.addEventListener('change', function (e) {
+            toggleFields(e.target.value);
+        });
+
+        window.onload = function () {
+            toggleFields(stageSelect.value);
+        };
+    </script>
+</div>

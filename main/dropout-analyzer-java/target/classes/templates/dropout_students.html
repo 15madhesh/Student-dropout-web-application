@@ -1,0 +1,160 @@
+<div th:replace="~{base :: content}">
+    <div class="container" style="display: flex; gap: 20px;">
+        <div style="flex: 1;">
+            <h2>Dropout Students</h2>
+            <button id="toggleTableBtn" style="margin-bottom: 10px;">Show Dropout Students Table</button>
+            <form method="post" id="studentForm">
+                <label for="studentSelect">Select Student:</label>
+                <select id="studentSelect" name="student_id">
+                    <option value="">-- Select a student --</option>
+                    <option th:each="student : ${students}" th:value="${student.id}" th:selected="${selected_student != null and student.id == selected_student.id}" th:text="${student.stud_name}"></option>
+                </select>
+                <button type="submit" name="action" value="load" style="margin-left: 10px;">Load</button>
+            </form>
+            <div id="dropoutTableContainer" style="display:none; margin-top: 20px; max-height: 300px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; border-radius: 8px; background-color: #fff;">
+                <table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Date of Birth</th>
+                            <th>College</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${dropout_students}">
+                            <td th:text="${item.student.stud_name}"></td>
+                            <td th:text="${item.student.dob}"></td>
+                            <td th:text="${item.student.clg_name}"></td>
+                            <td th:text="${item.student.status}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-top: 10px;">
+                <a th:href="@{/dropout-details}" style="text-decoration: none; color: #007BFF; font-weight: bold; font-size: 1.1em;">View Detailed Dropout Student Information &rarr;</a>
+            </div>
+        </div>
+        <div style="flex: 2; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background-color: #f9f9f9;">
+            <div th:if="${selected_student}">
+                <h3 th:text="'Details for ' + ${selected_student.stud_name}"></h3>
+                <form method="post" id="detailsForm">
+                    <input type="hidden" name="student_id" th:value="${selected_student.id}" />
+                    <p><strong>Date of Birth:</strong> <span th:text="${selected_student.dob}"></span></p>
+                    <p><strong>Status:</strong> <span th:text="${selected_student.status}"></span></p>
+                    <p><strong>College:</strong> <span th:text="${selected_student.clg_name}"></span></p>
+                    <p><strong>Mother's Name:</strong> <span th:text="${selected_student.mother_name}"></span></p>
+                    <p><strong>Father's Name:</strong> <span th:text="${selected_student.father_name}"></span></p>
+                    <p><strong>Address:</strong> <span th:text="${selected_student.address}"></span></p>
+
+                    <hr />
+                    <h4>Disciplinary Action Records</h4>
+                    <label>Disciplinary Action:</label><br />
+                    <input type="radio" id="disciplinary_yes" name="disciplinary_action" value="yes" th:checked="${dropout_details != null and dropout_details.disciplinary_action}" />
+                    <label for="disciplinary_yes">Yes</label>
+                    <input type="radio" id="disciplinary_no" name="disciplinary_action" value="no" th:checked="${dropout_details != null and not dropout_details.disciplinary_action}" />
+                    <label for="disciplinary_no">No</label>
+
+                    <p>
+                        <label for="family_income">Family Income:</label><br />
+                        <input type="text" id="family_income" name="family_income" th:value="${dropout_details != null ? dropout_details.family_income : ''}" />
+                    </p>
+
+                    <p>
+                        <label for="fees_payment_status">Fees Payment Status:</label><br />
+                        <select id="fees_payment_status" name="fees_payment_status">
+                            <option value="ontime" th:selected="${dropout_details != null and dropout_details.fees_payment_status == 'ontime'}">On Time</option>
+                            <option value="delayed" th:selected="${dropout_details != null and dropout_details.fees_payment_status == 'delayed'}">Delayed</option>
+                            <option value="pending" th:selected="${dropout_details != null and dropout_details.fees_payment_status == 'pending'}">Pending</option>
+                        </select>
+                    </p>
+
+                    <label>Educational Load Taken:</label><br />
+                    <input type="radio" id="educational_load_yes" name="educational_load" value="yes" th:checked="${dropout_details != null and dropout_details.educational_load}" />
+                    <label for="educational_load_yes">Yes</label>
+                    <input type="radio" id="educational_load_no" name="educational_load" value="no" th:checked="${dropout_details != null and not dropout_details.educational_load}" />
+                    <label for="educational_load_no">No</label>
+
+                    <label>Part Time Work While Studying:</label><br />
+                    <input type="radio" id="part_time_work_yes" name="part_time_work" value="yes" th:checked="${dropout_details != null and dropout_details.part_time_work}" />
+                    <label for="part_time_work_yes">Yes</label>
+                    <input type="radio" id="part_time_work_no" name="part_time_work" value="no" th:checked="${dropout_details != null and not dropout_details.part_time_work}" />
+                    <label for="part_time_work_no">No</label>
+
+                    <label>Health Issue:</label><br />
+                    <input type="radio" id="health_issue_yes" name="health_issue" value="yes" th:checked="${dropout_details != null and dropout_details.health_issue}" />
+                    <label for="health_issue_yes">Yes</label>
+                    <input type="radio" id="health_issue_no" name="health_issue" value="no" th:checked="${dropout_details != null and not dropout_details.health_issue}" />
+                    <label for="health_issue_no">No</label>
+
+                    <p>
+                        <label for="health_issue_description">If yes, describe:</label><br />
+                        <textarea id="health_issue_description" name="health_issue_description" rows="3" cols="40" th:text="${dropout_details != null ? dropout_details.health_issue_description : ''}"></textarea>
+                    </p>
+
+                    <p>
+                        <label for="day_scholar_or_hosteller">Day Scholar or Hosteller:</label><br />
+                        <select id="day_scholar_or_hosteller" name="day_scholar_or_hosteller">
+                            <option value="day scholar" th:selected="${dropout_details != null and dropout_details.day_scholar_or_hosteller == 'day scholar'}">Day Scholar</option>
+                            <option value="hosteller" th:selected="${dropout_details != null and dropout_details.day_scholar_or_hosteller == 'hosteller'}">Hosteller</option>
+                        </select>
+                    </p>
+
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+            <div th:unless="${selected_student}">
+                <p>Please select a student to view and edit details.</p>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        <h3>Dropout Students Count by College</h3>
+        <canvas id="dropoutChart" width="600" height="400"></canvas>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.getElementById('toggleTableBtn').addEventListener('click', function() {
+            var tableContainer = document.getElementById('dropoutTableContainer');
+            if (tableContainer.style.display === 'none' || tableContainer.style.display === '') {
+                tableContainer.style.display = 'block';
+                this.textContent = 'Hide Dropout Students Table';
+            } else {
+                tableContainer.style.display = 'none';
+                this.textContent = 'Show Dropout Students Table';
+            }
+        });
+
+        const collegeCounts = /*[[${college_counts}]]*/ {};
+        const labels = Object.keys(collegeCounts);
+        const data = Object.values(collegeCounts);
+
+        const ctx = document.getElementById('dropoutChart').getContext('2d');
+        const dropoutChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Dropout Students Count',
+                    data: data,
+                    backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        precision: 0
+                    }
+                }
+            }
+        });
+        /*]]>*/
+    </script>
+</div>
