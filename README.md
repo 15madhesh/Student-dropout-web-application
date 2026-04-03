@@ -1,31 +1,31 @@
-🎓 Student Dropout Prediction Web Application
+# 🎓 Student Dropout Prediction Web Application
 
-📌 Overview
+## 📌 Overview
 
 This project is a **Student Dropout Prediction Web Application** that helps identify students who are at risk of dropping out. The system uses machine learning techniques to analyze student data and provide predictions, enabling institutions to take early interventions.
 
 ---
 
-🚀 Features
+## 🚀 Features
 
-📊 Predict student dropout risk using ML models
-🧑‍🎓 User-friendly web interface
-📁 Upload student data
-📈 Data preprocessing and visualization
-⚡ Real-time prediction results
-
----
-
-🛠️ Tech Stack
-
-**Frontend:** HTML, CSS, JavaScript
-**Backend:** Python (Flask/Django)
-**Machine Learning:** Scikit-learn, Pandas, NumPy
-**Database:** SQLite / MySQL (if used)
+* 📊 Predict student dropout risk using ML models
+* 🧑‍🎓 User-friendly web interface
+* 📁 Upload student data
+* 📈 Data preprocessing and visualization
+* ⚡ Real-time prediction results
 
 ---
 
-📂 Project Structure
+## 🛠️ Tech Stack
+
+* **Frontend:** HTML, CSS, JavaScript
+* **Backend:** Python (Flask/Django)
+* **Machine Learning:** Scikit-learn, Pandas, NumPy
+* **Database:** SQLite / MySQL (if used)
+
+---
+
+## 📂 Project Structure
 
 ```
 Student-dropout-web-application/
@@ -40,45 +40,45 @@ Student-dropout-web-application/
 
 ---
 
-⚙️ Installation & Setup
+## ⚙️ Installation & Setup
 
-1️⃣ Clone the Repository
+### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/15madhesh/Student-dropout-web-application.git
 cd Student-dropout-web-application
 ```
 
-2️⃣ Create Virtual Environment (Optional but Recommended)
+### 2️⃣ Create Virtual Environment (Optional but Recommended)
 
 ```bash
 python -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
 ```
 
-3️⃣ Install Dependencies
+### 3️⃣ Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4️⃣ Run the Application
+### 4️⃣ Run the Application
 
 ```bash
 python app.py
 ```
 
-5️⃣ Open in Browser
+### 5️⃣ Open in Browser
 
 Go to: `http://127.0.0.1:5000/`
 
 ---
 
-🧠 Machine Learning Model
+## 🧠 Machine Learning Model
 
-Model used: (e.g., Logistic Regression / Random Forest / Decision Tree)
-Dataset: Student performance dataset
-Preprocessing:
+* Model used: (e.g., Logistic Regression / Random Forest / Decision Tree)
+* Dataset: Student performance dataset
+* Preprocessing:
 
   * Handling missing values
   * Encoding categorical variables
@@ -86,7 +86,7 @@ Preprocessing:
 
 ---
 
-📌 Use Case
+## 📌 Use Case
 
 This system can be used by:
 
@@ -98,16 +98,16 @@ To monitor student performance and reduce dropout rates.
 
 ---
 
-🔮 Future Improvements
+## 🔮 Future Improvements
 
-🔍 Improve model accuracy
-📊 Add dashboard analytics
-☁️ Deploy on cloud (AWS/Heroku)
-🔐 User authentication system
+* 🔍 Improve model accuracy
+* 📊 Add dashboard analytics
+* ☁️ Deploy on cloud (AWS/Heroku)
+* 🔐 User authentication system
 
 ---
 
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome!
 
@@ -119,22 +119,19 @@ Contributions are welcome!
 
 ---
 
-📄 License
+## 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-👨‍💻 Author
+## 👨‍💻 Author
 
 **Madhesh**
-GitHub: (https://github.com/15madhesh)
+GitHub: [https://github.com/15madhesh](https://github.com/15madhesh)
 
 ---
 
+## ⭐ Show Your Support
 
-⭐ Show Your Support
-
-If you like this project, please ⭐ the repository
-
----
+If you like this project, please ⭐ the repository!
